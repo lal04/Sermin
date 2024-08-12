@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html'%}
+{% block title%}documentos{%endblock%}
+
+{%block content%}
+
+<h1>Lista de Documentos</h1>
+
+<table class="table">
+    <button class="new">
+        <a href="{% url 'document_new'%}">Nuevo</a>
+    </button>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Fecha inicio</th>
+            <th>Fecha vencimiento</th>
+            <th>Carro</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for documento in object_list%}
+        <tr>
+            <td>{{documento.id}}</td>
+            <td>{{documento.tipo}}</td>
+            <td>{{documento.fecha_inicio}}</td>
+            <td>{{documento.fecha_vencimiento}}</td>
+            <td>{{documento.car}}</td>
+            <td class="action-column">
+                <div class="action-buttons">
+                    <button class="new">
+                        <a href="{% url 'document_detail' documento.id%}">Ver</a>
+                    </button>
+                    <button class="edit">
+                        <a href="{% url 'document_edit' documento.id%}">Editar</a>
+                    </button>
+                    <button class="delete">
+                        <a href="{% url 'document_delete' documento.id%}">Eliminar</a>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+
+
+{%endblock%}

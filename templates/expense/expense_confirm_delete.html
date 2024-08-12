@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Gastos{% endblock %}
+{%block script%}
+{%endblock%}
+{% block content %}
+<h1>Eliminar Gasto</h1>
+
+<div class="form-container">
+    <form method="post">
+            <p>¿Estás seguro de que deseas eliminar a {{ object.titulo }}?</p>
+            {% csrf_token %}
+            
+            <div class="action-buttons">
+                <button type="submit">Confirmar</button>
+                <button class="delete">
+    
+                    <a href="{% url 'expense_list' %}">Cancelar</a>
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

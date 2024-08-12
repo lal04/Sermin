@@ -1,0 +1,57 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} {%endblock%}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+ 
+    {%block script%}{%endblock%}
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="{% url 'dashboard'%}"><img src="{% static 'img/9391714.png' %}" alt="Logo" srcset=""></a>
+        </div>
+        <!-- </div>
+        <ul class="navbar-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Sobre nosotros</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul> -->
+    </nav>
+    <div class="sidebar">
+        <a href="#home">Inicio</a>
+        <a href="#services" class="dropdown-btn">Control</a>
+        <div class="dropdown-container">
+            <a href="{% url 'car_list'%}">Carros</a>
+            <a href="{% url 'document_list'%}">Documentos</a>
+            
+            <a href="{% url 'maintenance_list'%}">Mantenimientos</a>
+            <a href="{% url 'route_list'%}">Rutas</a>
+            <a href="{% url 'city_list'%}">Ciudades</a>
+            <a href="{% url 'expense_list'%}">Gastos</a>
+        </div>
+        <a href="#about" class="dropdown-btn">Sobre nosotros</a>
+        <div class="dropdown-container">
+            <a href="#mision">Mision</a>
+            <a href="#vision">Vision</a>
+            
+        </div>
+        <a href="#contact">Contacto</a>
+    </div>
+    <div class="content">
+
+        {% block content%}
+        {%endblock%}
+        
+    </div>
+
+    <script src="{% static 'js/scripts.js'%}"></script>
+    
+</body>
+</html>

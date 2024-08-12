@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html'%}
+{% block title%}Ciudad{%endblock%}
+
+{%block content%}
+
+<h1>Lista de Ciudades</h1>
+
+<table class="table">
+    <button class="new">
+        <a href="{% url 'city_new'%}">Nuevo</a>
+    </button>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for city in object_list%}
+        <tr>
+            <td>{{city.id}}</td>
+            <td>{{city.nombre}}</td>
+            <td class="action-column">
+                <div class="action-buttons">
+                    <button class="new">
+                        <a href="{% url 'city_detail' city.id%}">Ver</a>
+                    </button>
+                    <button class="edit">
+                        <a href="{% url 'city_edit' city.id%}">Editar</a>
+                    </button>
+                    <button class="delete">
+                        <a href="{% url 'city_delete' city.id%}">Eliminar</a>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+
+
+{%endblock%}

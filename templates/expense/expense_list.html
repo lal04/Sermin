@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html'%}
+{% block title%}Gastos{%endblock%}
+
+{%block content%}
+
+<h1>Lista de gastos</h1>
+
+<table class="table">
+    <button class="new">
+        <a href="{% url 'expense_new'%}">Nuevo</a>
+    </button>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Ruta</th>
+            <th>Descripcion</th>
+            <th>Monto</th>
+            <th>Accion</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {%for gasto in object_list%}
+        <tr>
+            <td>{{gasto.id}}</td>
+            <td>{{gasto.titulo}}</td>
+            <td>{{gasto.route}}</td>
+            <td>{{gasto.descripcion}}</td>
+            <td>{{gasto.monto}}</td>
+            <td class="action-column">
+                <div class="action-buttons">
+                    <button class="new">
+                        <a href="{% url 'expense_detail' gasto.id%}">Ver</a>
+                    </button>
+                    <button class="edit">
+                        <a href="{% url 'expense_edit' gasto.id%}">Editar</a>
+                    </button>
+                    <button class="delete">
+                        <a href="{% url 'expense_delete' gasto.id%}">Eliminar</a>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+
+
+{%endblock%}

@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html'%}
+{% block title%}mantenimientos{%endblock%}
+
+{%block content%}
+
+<h1>Lista de mantenimientos</h1>
+
+<table class="table">
+    <button class="new">
+        <a href="{% url 'maintenance_new'%}">Nuevo</a>
+    </button>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Carro</th>
+            <th>Fecha vencimiento</th>
+            <th>Carro</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for mantenimiento in object_list%}
+        <tr>
+            <td>{{mantenimiento.id}}</td>
+            <td>{{mantenimiento.titulo}}</td>
+            <td>{{mantenimiento.car}}</td>
+            <td>{{mantenimiento.fecha_mantenimiento}}</td>
+            <td>{{mantenimiento.car}}</td>
+            <td class="action-column">
+                <div class="action-buttons">
+                    <button class="new">
+                        <a href="{% url 'maintenance_detail' mantenimiento.id%}">Ver</a>
+                    </button>
+                    <button class="edit">
+                        <a href="{% url 'maintenance_edit' mantenimiento.id%}">Editar</a>
+                    </button>
+                    <button class="delete">
+                        <a href="{% url 'maintenance_delete' mantenimiento.id%}">Eliminar</a>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+
+
+{%endblock%}

@@ -1,0 +1,59 @@
+{% extends 'layouts/base.html'%}
+{% block title%}carros{%endblock%}
+
+{%block content%}
+
+<h1>Lista de rutas</h1>
+
+<table class="table">
+    <button class="new">
+        <a href="{% url 'route_new'%}">Nuevo</a>
+    </button>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
+            <th>Carro</th>
+            <th>Usuario</th>
+            <th>Kilometraje inicial</th>
+            <th>Kilometraje final</th>
+            <th>Ciudad origen</th>
+            <th>Ciudad destino</th>    
+            <th>Accion</th> 
+   
+        </tr>
+    </thead>
+    <tbody>
+        {%for ruta in object_list%}
+        <tr>
+            <td>{{ruta.id}}</td>
+            <td>{{ruta.fecha_inicio}}</td>
+            <td>{{ruta.fecha_fin}}</td>
+            <td>{{ruta.car}}</td>
+            <td>{{ruta.user}}</td>
+            <td>{{ruta.kilometraje_inicio}}</td>
+            <td>{{ruta.kilometraje_fin}}</td>
+            <td>{{ruta.ciudad_origen}}</td>
+            <td>{{ruta.ciudad_destino}}</td>
+            <td class="action-column">
+                <div class="action-buttons">
+                    <button class="new">
+                        <a href="{% url 'route_detail' ruta.id%}">Ver</a>
+                    </button>
+                    <button class="edit">
+                        <a href="{% url 'route_edit' ruta.id%}">Editar</a>
+                    </button>
+                    <button class="delete">
+                        <a href="{% url 'route_delete' ruta.id%}">Eliminar</a>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+
+
+{%endblock%}

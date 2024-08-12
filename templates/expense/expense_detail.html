@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Detalle{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1>{{ object.titulo }} {{ object.placa }}</h1>
+    </div>
+    <div class="card-content">
+        <p><strong>Titulo:</strong> {{ object.titulo }}</p>
+        <p><strong>Ruta:</strong> {{ object.route }}</p>
+        <p><strong>Descripcion:</strong> {{ object.descripcion }} </p>
+        <p><strong>Monto:</strong> s/. {{ object.monto }}</p>
+        <!-- Agrega más campos aquí si es necesario -->
+    </div>
+    <div class="card-actions">
+        <button class="edit">
+            <a href="{% url 'expense_edit' object.pk %}">Editar</a>
+        </button>
+        <button class="delete">
+            <a href="{% url 'expense_delete' object.pk %}">Eliminar</a>
+        </button>
+        <button class="new">
+            <a href="{% url 'expense_list' %}">Volver a la Lista</a>
+        </button>
+    </div>
+</div>
+{% endblock %}

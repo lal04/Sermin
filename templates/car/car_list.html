@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html'%}
+{% block title%}carros{%endblock%}
+
+{%block content%}
+
+<h1>Lista de carros</h1>
+
+<table class="table">
+    <button class="new">
+        <a href="{% url 'car_new'%}">Nuevo</a>
+    </button>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Modelo</th>
+            <th>Placa</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for carro in object_list%}
+        <tr>
+            <td>{{carro.id}}</td>
+            <td>{{carro.modelo}}</td>
+            <td>{{carro.placa}}</td>
+            <td class="action-column">
+                <div class="action-buttons">
+                    <button class="new">
+                        <a href="{% url 'car_detail' carro.id%}">Ver</a>
+                    </button>
+                    <button class="edit">
+                        <a href="{% url 'car_edit' carro.id%}">Editar</a>
+                    </button>
+                    <button class="delete">
+                        <a href="{% url 'car_delete' carro.id%}">Eliminar</a>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+
+
+{%endblock%}

@@ -1,0 +1,248 @@
+body{
+    /* background-color: red; */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+/* NAVBAR */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar-logo a {
+    /* background-color: aqua; */
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+.navbar-logo a img {
+    height: 40px;  /* Ajusta el tamaño de la imagen */
+    width: auto;   /* Mantiene la proporción de la imagen */
+}
+.navbar-links{
+    /* background-color:purple; */
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+
+}
+.navbar-links li {
+    float: left;
+}
+
+.navbar-links li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar-links li a:hover {
+    background-color: #575757;
+}
+/* SIDEBAR */
+.sidebar {
+    /* background-color: aquamarine; */
+    height: 100%;
+    width: 250px;
+    position:absolute;
+    left: 0;
+    top: auto;
+    padding-top: 25px;
+    background-color: #333; 
+}
+.sidebar a {
+    
+    display: block;
+    /* background-color: rgb(176, 190, 92); */
+    padding: 10px 15px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+.sidebar a:hover {
+    background-color: #575757;
+}
+
+/* CLASES PARA SIDEBAR DESPLEGABLE */
+.dropdown-btn {
+    cursor: pointer;
+}
+.dropdown-container {
+    display: none;
+    background-color: #444;
+}
+.dropdown-container a {
+    padding: 10px 30px;
+}
+.content{
+    /* background-color: blue; */
+    margin-left: 260px;
+    padding: 20px;
+    
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+.table th {
+    background-color: #756e6e;
+    color: black;
+}
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+button {
+    display: inline-block;
+    width: 30pxss;
+    margin: 5px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #439940;
+}
+button:hover {
+    background-color: #21971d;
+
+}
+button a {
+    color: white;
+    text-decoration: none;
+}
+.new {
+    background-color: #1a62af;
+}
+
+.new:hover {
+    background-color: #0056b3;
+}
+
+.edit {
+    background-color: #ffa500; /* Color para el botón de editar */
+}
+
+.edit:hover {
+    background-color: #ff8c00;
+}
+
+.delete {
+    background-color: #d9534f; /* Color para el botón de eliminar */
+}
+
+.delete:hover {
+    background-color: #c9302c;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center; /* Centrar los botones */
+    gap: 10px; /* Espaciado entre los botones */
+}
+.action-column {
+    width: 25%; /* Ajusta el ancho de la columna acción según sea necesario */
+    white-space: nowrap; /* Evita que los botones se apilen verticalmente */
+}
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para el formulario */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Nuevo contenedor para centrar el formulario */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+form p {
+    margin-bottom: 1em;
+}
+
+label {
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    padding: 0.5em;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100%;
+}
+
+input[type="date"] {
+    padding: 0.5em;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1em;
+}
+/* Estilos para la tarjeta */
+.card {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-content {
+    padding: 10px 0;
+}
+
+.card-content p {
+    margin: 10px 0;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+
