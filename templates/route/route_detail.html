@@ -5,22 +5,28 @@
 {% block content %}
 <div class="card">
     <div class="card-header">
-        <h1>{{ object.modelo }} {{ object.placa }}</h1>
+        <h1>{{ object.id}} {{ object.ciudad_origen }}-{{object.ciudad_destino}}</h1>
     </div>
     <div class="card-content">
-        <p><strong>Modelo:</strong> {{ object.modelo }}</p>
-        <p><strong>Placa:</strong> {{ object.placa }}</p>
+        <p><strong>Fecha inicio:</strong> {{ object.fecha_inicio }}</p>
+        <p><strong>Fecha fin:</strong> {{ object.fecha_fin }}</p>
+        <p><strong>Carro:</strong> {{ object.car }}</p>
+        <p><strong>Usuario:</strong> {{ object.user }}</p>
+        <p><strong>Kilometraje inicio:</strong> {{ object.kilometraje_inicio}}</p>
+        <p><strong>Kilometraje fin:</strong> {{ object.kilometraje_fin}}</p>
+        <p><strong>Origen:</strong> {{ object.ciudad_origen}}</p>
+        <p><strong>Destino:</strong> {{ object.ciudad_destino}}</p>
         <!-- Agrega más campos aquí si es necesario -->
     </div>
     <div class="card-actions">
         <button class="edit">
-            <a href="{% url 'car_edit' object.pk %}">Editar</a>
+            <a href="{% url 'route_edit' object.pk %}">Editar</a>
         </button>
         <button class="delete">
-            <a href="{% url 'car_delete' object.pk %}">Eliminar</a>
+            <a href="{% url 'route_delete' object.pk %}">Eliminar</a>
         </button>
         <button class="new">
-            <a href="{% url 'car_list' %}">Volver a la Lista</a>
+            <a href="{% url 'route_list' %}">Volver a la Lista</a>
         </button>
     </div>
 </div>
