@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.urls import path,include
-from .views import dasboard
+from .views import dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', dasboard, name='dashboard'),
+    path('', dashboard, name='dashboard'),
     path('carro/',include('ControlVehiculos.url.carurls')),
     path('document/',include('ControlVehiculos.url.documenturls')),
     path('maintenance/',include('ControlVehiculos.url.maintenanceurls')),

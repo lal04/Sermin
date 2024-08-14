@@ -1,52 +1,54 @@
-{% extends 'layouts/base.html'%}
-{% block title%}Dasboard{%endblock%}
+{% extends 'layouts/base.html' %}
+{% block title %}Dashboard{% endblock %}
 
-{%block content%}
-
+{% block content %}
 <h1>Dashboard</h1>
 <div class="container">
-
     <div class="card item">
         <h2>Numero de rutas</h2>
+        {{ gastos|length }} <!-- Muestra la cantidad de gastos -->
     </div>
     <div class="card item">
-        <h2>clientes</h2>
+        <h2>Clientes</h2>
     </div>
     <div class="card item">
-        <h2>clientes</h2>
+        <h2>Clientes</h2>
     </div>
     <div class="card item">
-        <h2>clientes</h2>
+        <h2>Clientes</h2>
     </div>
 </div>
 <div>
     <canvas id="myChart"></canvas>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
-  <script>
-    const ctx = document.getElementById('myChart');
-  
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 50, 3, 5, 2, 3],
-          borderWidth: 1,
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  </script>
-   
+</div>
 
-{%endblock%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ etiquetas|safe }}, // Etiquetas de los meses
+            datasets: [{
+                label: 'Gastos',
+                data: {{ gastos_por_mes|safe }}, // Datos de gastos
+                borderWidth: 1,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Puedes ajustar los colores
+                borderColor: 'rgba(75, 192, 192, 1)' // Ajustar colores de bordes
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

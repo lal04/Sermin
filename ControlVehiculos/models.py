@@ -42,7 +42,7 @@ class Route(models.Model):
     ciudad_origen=models.ForeignKey(City, on_delete=models.CASCADE, related_name='origin_cities')
     ciudad_destino=models.ForeignKey(City, on_delete=models.CASCADE, related_name='destination_cities')
     def __str__(self) -> str:
-        return str(self.id)
+        return f"{self.id}-{self.ciudad_origen}-{self.ciudad_destino}"
 class Expense(models.Model):  
     titulo=models.CharField(max_length=20)
     route=models.ForeignKey(Route, on_delete=models.CASCADE, related_name='routes', verbose_name='ruta')
