@@ -23,11 +23,11 @@ Lista de Proveedores
     </thead>
     <tbody>
       {% for proveedor in proveedor_list %}
-      <tr>
+      <tr onclick="window.location.href='{% url "proveedor_detail" proveedor.pk %}'" >
         <td>{{ proveedor.nombre }}</td>
         <td>{{ proveedor.ruc }}</td>
         <td class="table-actions">
-          <a href="{% url 'proveedor_detail' proveedor.pk %}">Ver</a>
+          
           <a href="{% url 'proveedor_update' proveedor.pk %}">Editar</a>
           <a href="{% url 'proveedor_delete' proveedor.pk %}">Eliminar</a>
         </td>

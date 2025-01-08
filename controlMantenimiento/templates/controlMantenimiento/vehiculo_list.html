@@ -18,18 +18,17 @@ Lista de Vehículos
       <tr>
         <th>Marca</th>
         <th>Modelo</th>
-        <th>Número de Placa</th>
+        <th>Numero de Placa</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       {% for vehiculo in object_list %}
-      <tr>
+      <tr onclick="window.location.href='{% url "vehiculo_detail" vehiculo.pk %}'">
         <td>{{ vehiculo.marca }}</td>
         <td>{{ vehiculo.modelo }}</td>
         <td>{{ vehiculo.numero_placa }}</td>
         <td class="table-actions">
-          <a href="{% url 'vehiculo_detail' vehiculo.pk %}">Ver</a>
           <a href="{% url 'vehiculo_update' vehiculo.pk %}">Editar</a>
           <a href="{% url 'vehiculo_delete' vehiculo.pk %}">Eliminar</a>
         </td>

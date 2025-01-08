@@ -22,12 +22,11 @@ Lista de Documentos
             </thead>
             <tbody>
                 {% for documento in object_list %}
-                <tr>
+                <tr onclick="window.location.href='{% url "documento_detail" documento.pk %}'" >
                     <td>{{ documento.get_tipo_documento_display }}</td>
                     <td>{%if documento.vehiculo%}{{documento.vehiculo}}{%else%}{{documento.usuario}}{%endif%}</td>
                     <td>{{ documento.fecha_expiracion }}</td>
                     <td class="table-actions">
-                        <a href="{% url 'documento_detail' documento.pk %}">Ver</a>
                         <a href="{% url 'documento_update' documento.pk %}">Editar</a>
                         <a href="{% url 'documento_delete' documento.pk %}">Eliminar</a>
                     </td>

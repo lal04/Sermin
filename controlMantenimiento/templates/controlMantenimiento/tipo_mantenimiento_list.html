@@ -14,15 +14,16 @@ Lista de Tipos de Mantenimiento
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Descripcion</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for tipo in object_list %}
-                <tr>
+                {% for tipo in tipomantenimiento_list %}
+                <tr onclick="window.location.href='{% url "tipo_mantenimiento_detail" tipo.pk %}'" >
                     <td>{{ tipo.nombre }}</td>
+                    <td>{{ tipo.descripcion }}</td>
                     <td class="table-actions">
-                        <a href="{% url 'tipo_mantenimiento_detail' tipo.pk %}">Ver</a>
                         <a href="{% url 'tipo_mantenimiento_update' tipo.pk %}">Editar</a>
                         <a href="{% url 'tipo_mantenimiento_delete' tipo.pk %}">Eliminar</a>
                     </td>
