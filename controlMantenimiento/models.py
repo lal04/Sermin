@@ -1,13 +1,15 @@
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.db import models
+
+
 class Vehiculo(models.Model):
     marca = models.CharField(max_length=100)
     modelo = models.CharField(max_length=100)
     anio = models.IntegerField(verbose_name="año")
     numero_placa = models.CharField(max_length=20, unique=True)
     def __str__(self):
-        return f"{self.marca} ({self.numero_placa})"
+        return self.marca
     
     
 class TipoMantenimiento(models.Model):
@@ -40,19 +42,19 @@ class Mantenimiento(models.Model):
     
 class Documento(models.Model):
     TIPO_DOCUMENTO_CHOICES = [
-        ('TC', 'Tarjeta de Circulación'),
-        ('LIC', 'Licencia de Conducir'),
-        ('S', 'Soat'),
-        ('TP', 'Tarjeta de Propiedad'),
-        ('R', 'Revisión Técnica'),
-        ('P', 'Permiso de Recojo de Reciduos'),
-        ('CAP', 'Certificado de Aptitud Psicofísica'),
-        ('CI', 'Capacitación'),
-        ('O', 'Otro'),
+        ('Tarjeta de Circulacion', 'Tarjeta de Circulacion'),
+        ('Licencia de Conducir', 'Licencia de Conducir'),
+        ('Soat', 'Soat'),
+        ('Tarjeta de Propiedad', 'Tarjeta de Propiedad'),
+        ('Revision Tecnica', 'Revision Tecnica'),
+        ('Permiso de Recojo de Reciduos', 'Permiso de Recojo de Reciduos'),
+        ('Certificado de Aptitud Psicofisica', 'Certificado de Aptitud Psicofisica'),
+        ('Capacitacion', 'Capacitacion'),
+        ('Otro', 'Otro'),
         
         # Agrega más tipos de documentos según sea necesario
     ]
-    tipo_documento = models.CharField(max_length=3, choices=TIPO_DOCUMENTO_CHOICES)
+    tipo_documento = models.CharField(max_length=50, choices=TIPO_DOCUMENTO_CHOICES)
 
     vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, blank=True, null=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

@@ -22,9 +22,33 @@
 
    {% comment %} incluimos el navbar a la plantilla base {% endcomment %}
     {% include 'components/navbar.html' %}
-    
 
+
+    
+    
     <main>
+      {% comment %} titulo del contenido {% endcomment %}
+      <h1>
+        {% block title_content %}
+        
+        {% endblock %}
+      </h1>
+
+      {% comment %} {% if not request.resolver_match.url_name == 'home' and not pk %} {% endcomment %}
+      {% if request.resolver_match.url_name == 'vehiculo_list' or  request.resolver_match.url_name == 'tipo_mantenimiento_list' or request.resolver_match.url_name == 'mantenimiento_list' or request.resolver_match.url_name == 'documento_list' or request.resolver_match.url_name == 'proveedor_list' %}
+        
+        <form action="{% url request.resolver_match.url_name %}" method="get">
+        <input type="text" name="buscador" placeholder="Buscar..." >
+        <button class="btn btn-primary btn-margin" type="submit">Buscar</button>
+        
+
+      {% endif %}
+
+
+      
+
+
+
       {% if messages %}
       <ul class="messages">
         {% for message in messages %}
@@ -33,9 +57,16 @@
       </ul>
       {% endif %}
 
-      <div class="container">{% block content %} {% endblock %}</div>
+
+
+      <div class="container">
+        {% block content %}
+
+        {% endblock %}
+      </div>
     </main>
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+    {% endblock %}
     
   </body>
 </html>

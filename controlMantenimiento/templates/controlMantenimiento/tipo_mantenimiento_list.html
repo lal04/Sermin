@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Lista de Tipos de Mantenimiento{% endblock %}
+{% block title_content %}
+{% block title %}
+Lista de Tipos de Mantenimiento
+{% endblock %}
+{% endblock %}
 
 {% block content %}
-    <h1>Lista de Tipos de Mantenimiento</h1>
+
     <a class="btn btn-primary btn-margin" href="{% url 'tipo_mantenimiento_create' %}">Agregar</a>
     <div class="table-container">
         <table>

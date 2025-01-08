@@ -1,6 +1,14 @@
-{% extends 'base.html' %} {% block title %}Lista de Vehículos{% endblock %}
+{% extends 'base.html' %}
+
+
+{% block title_content %}
+{% block title %}
+Lista de Proveedores
+{% endblock %}
+{% endblock %}
+
 {%block content %}
-<h1>Lista de Proveedores</h1>
+
 <a class="btn btn-primary btn-margin" href="{% url 'proveedor_create' %}"
   >Agregar</a
 >

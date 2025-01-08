@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, Q
 from datetime import datetime, timedelta
 
 from django.views.generic import (ListView, DetailView,
@@ -63,6 +63,7 @@ def home(request):
         'gastos_mensuales': gastos_mensuales,
         'gastos_mensuales_json': gastos_mensuales_json,
         'mantenimientos_proximos': mantenimientos_proximos,
+        'pk': ''
     }
 
     # Renderiza la plantilla 'home.html' con el contexto
@@ -75,6 +76,18 @@ def home(request):
 class VehiculoListView(LoginRequiredMixin, ListView):
     model = Vehiculo
     template_name = 'controlMantenimiento/vehiculo_list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('buscador', '')
+        if query:
+            queryset = queryset.filter(
+                Q(marca__icontains=query) |
+                Q(modelo__icontains=query) |
+                Q(numero_placa__icontains=query)
+                
+            )
+        return queryset
     
 
 class VehiculoDetailView(LoginRequiredMixin, DetailView):
@@ -105,6 +118,16 @@ class VehiculoDeleteView(LoginRequiredMixin,DeleteView):
 class TipoMantenimientoListView(LoginRequiredMixin, ListView):
     model = TipoMantenimiento
     template_name = 'controlMantenimiento/tipo_mantenimiento_list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('buscador', '')
+        if query:
+            queryset = queryset.filter(
+                Q(nombre__icontains=query)|
+                Q(descripcion__icontains=query)
+                )
+        return queryset
 
 class TipoMantenimientoDetailView(LoginRequiredMixin,DetailView):
     model = TipoMantenimiento
@@ -116,12 +139,14 @@ class TipoMantenimientoCreateView(LoginRequiredMixin,CreateView):
     fields = ['nombre', 'descripcion']
     success_url = reverse_lazy('tipo_mantenimiento_list')
     
+    
 
 class TipoMantenimientoUpdateView(LoginRequiredMixin, UpdateView):
     model = TipoMantenimiento
     template_name = 'controlMantenimiento/tipo_mantenimiento_form.html'
     fields = ['nombre', 'descripcion']
     success_url = reverse_lazy('tipo_mantenimiento_list')  # Añadir success_url
+    
 
 
 class TipoMantenimientoDeleteView(LoginRequiredMixin,DeleteView):
@@ -135,6 +160,18 @@ class TipoMantenimientoDeleteView(LoginRequiredMixin,DeleteView):
 class MantenimientoListView(LoginRequiredMixin,ListView):
     model = Mantenimiento
     template_name = 'controlMantenimiento/mantenimiento_list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('buscador', '')
+        if query:
+            queryset = queryset.filter(
+                Q(proveedor__nombre__icontains=query) |
+                Q(vehiculo__marca__icontains=query) |
+                Q(tipo_mantenimiento__nombre__icontains=query)
+                
+            )
+        return queryset
 
 class MantenimientoDetailView(LoginRequiredMixin,DetailView):
     model = Mantenimiento
@@ -147,13 +184,14 @@ class MantenimientoCreateView(LoginRequiredMixin, CreateView):
     template_name = 'controlMantenimiento/mantenimiento_form.html'
     success_url = reverse_lazy('mantenimiento_list')
     
+    
+    
 class MantenimientoUpdateView(LoginRequiredMixin,UpdateView):
     model = Mantenimiento
     fields = '__all__'
     # form_class = MantenimientoForm
     template_name = 'controlMantenimiento/mantenimiento_form.html'
-    success_url = reverse_lazy('mantenimiento_list')  # Añadir success_url
-    
+    success_url = reverse_lazy('mantenimiento_list')  # Añadir success_url  
 
 class MantenimientoDeleteView(LoginRequiredMixin,DeleteView):
     model = Mantenimiento
@@ -165,6 +203,18 @@ class MantenimientoDeleteView(LoginRequiredMixin,DeleteView):
 class DocumentoListView(LoginRequiredMixin, ListView):
     model = Documento
     template_name = 'controlMantenimiento/documento_list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('buscador', '')
+        if query:
+            queryset = queryset.filter(
+                Q(tipo_documento__icontains=query)|
+                Q(usuario__username__icontains=query)|
+                Q(vehiculo__marca__icontains=query)
+  
+            )
+        return queryset
 
 class DocumentoDetailView(LoginRequiredMixin, DetailView):
     model = Documento
@@ -195,6 +245,16 @@ class DocumentoDeleteView(LoginRequiredMixin, DeleteView):
 class ProveedorListView(LoginRequiredMixin, ListView):
     model = Proveedor
     template_name = 'controlMantenimiento/proveedor_list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('buscador', '')
+        if query:
+            queryset = queryset.filter(
+                Q(nombre__icontains=query)|
+                Q(ruc__icontains=query)
+            )
+        return queryset
 
 class ProveedorDetailView(LoginRequiredMixin, DetailView):
     model = Proveedor
@@ -219,6 +279,3 @@ class ProveedorDeleteView(LoginRequiredMixin, DeleteView):
     model = Proveedor
     template_name = 'controlMantenimiento/proveedor_confirm_delete.html'
     success_url = reverse_lazy('proveedor_list')
-    
-
-    

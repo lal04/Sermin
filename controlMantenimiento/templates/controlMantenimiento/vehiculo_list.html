@@ -1,6 +1,14 @@
-{% extends 'base.html' %} {% block title %}Lista de Vehículos{% endblock %}
+{% extends 'base.html' %}
+
+
+{% block title_content %}
+{% block title %}
+Lista de Vehículos
+{% endblock %}
+{% endblock %}
+
+
 {%block content %}
-<h1>Lista de Vehículos</h1>
 <a class="btn btn-primary btn-margin" href="{% url 'vehiculo_create' %}"
   >Agregar</a
 >

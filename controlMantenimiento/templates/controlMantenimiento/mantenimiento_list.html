@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Lista de Mantenimientos{% endblock %}
+{% block title_content %}
+{% block title %}
+Lista de Mantenimientos
+{% endblock %}
+{% endblock %}
 
 {% block content %}
-    <h1>Lista de Mantenimientos</h1>
     <a class="btn btn-primary btn-margin" href="{% url 'mantenimiento_create' %}">Agregar</a>
+
+
     <div class="table-container">
         <table>
             <thead>
                 <tr>
                     <th>Vehículo</th>
                     <th>Tipo de Mantenimiento</th>
+                    <th>Proveedor</th>
                     <th>Fecha de Mantenimiento</th>
                     <th>Costo</th>
                     <th>Acciones</th>
@@ -18,13 +24,13 @@
             </thead>
             <tbody>
                 {% for mantenimiento in object_list %}
-                <tr>
+                <tr onclick="window.location.href='{% url "mantenimiento_detail" mantenimiento.pk %}'">
                     <td>{{ mantenimiento.vehiculo }}</td>
                     <td>{{ mantenimiento.tipo_mantenimiento }}</td>
+                    <td>{{ mantenimiento.proveedor }}</td>
                     <td>{{ mantenimiento.fecha_mantenimiento }}</td>
                     <td> S/.{{ mantenimiento.costo }}</td>
                     <td class="table-actions">
-                        <a href="{% url 'mantenimiento_detail' mantenimiento.pk %}">Ver</a>
                         <a href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>
                         <a href="{% url 'mantenimiento_delete' mantenimiento.pk %}">Eliminar</a>
                     </td>
