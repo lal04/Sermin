@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if object %}Editar Tipo de Mantenimiento{% else %}Nuevo Tipo de Mantenimiento{% endif %}{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>{% if object %}Editar Tipo de Mantenimiento{% else %}Nuevo Tipo de Mantenimiento{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button type="submit" class="btn">Guardar</button>
+                <a href="{% url 'tipo_mantenimiento_list' %}" class="btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+

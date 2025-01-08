@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Detalle del Vehículo{% endblock %}
+{%block content %}
+<div class="detail-container">
+  <h2>{{ proveedor.nombre }}</h2>
+  <p><strong>Ruc:</strong> {{ proveedor.ruc }}</p>
+  <div class="table-actions">
+    <a href="{% url 'proveedor_update' proveedor.pk %}">Editar</a>
+    <a href="{% url 'proveedor_delete' proveedor.pk %}">Eliminar</a>
+    <a href="{% url 'proveedor_list' %}">Volver</a>
+  </div>
+</div>
+{% endblock %}

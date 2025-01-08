@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    padding-top: 3.5em; /* Añadir margen superior para el header */
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3em 2em;
+    background-color: #7fc67d;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Asegurar que esté por encima de la barra lateral */
+}
+header  a, header li{
+    text-decoration: none;
+    list-style: none;
+    font-size: 1.1em;
+    color: #fff;
+    
+}
+.nav_links li {
+    display: inline-block;
+    padding: 0 1.2em;
+}
+.logo {
+    cursor: pointer;
+    width: 2em;
+    border-radius: 1em;
+}
+.perfil {
+    display: block;
+    width: 2.3em;
+    height: 2.3em;
+    border-radius: 2em;
+    text-align: center;
+    color: #fff;
+    line-height: 2.3em;
+    
+}
+
+.sidebar {
+    width: 12.5em;
+    background-color: #3c3c3c;
+    position: fixed;
+    top: 3.5em; /* Debajo del header */
+    left: 0;
+    height: calc(100% - 3.5em); /* Ajustar la altura para el header */
+    padding-top: 1em;
+    z-index: 999; /* Asegurar que esté por debajo del header */
+    border-radius: 0 1em 1em 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 0; /* Eliminar padding del li */
+    text-align: center;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 1em; /* Añadir padding al enlace */
+    width: 100%; /* Asegurar que ocupe todo el ancho del li */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
+
+main {
+    margin-left: 13.5em; /* Añadir margen izquierdo para la barra lateral */
+    padding: 1em;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 5em auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-family: 'Bakbak One', cursive;
+}
+
+.login-container .form-group {
+    margin-bottom: 1.5em;
+}
+
+.login-container .form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.login-container .form-group input {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    font-size: 1em;
+}
+
+.login-container .btn {
+    display: block;
+    width: 100%;
+    padding: 0.75em;
+    background-color: #7fc67d;
+    color: #fff;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-align: center;
+}
+
+.login-container .btn:hover {
+    background-color: #6bbf6b;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 2em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2em;
+}
+
+table th, table td {
+    padding: 1em;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #7fc67d;
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.table-actions {
+    display: flex;
+    gap: 1em;
+}
+
+.table-actions a {
+    text-decoration: none;
+    color: #7fc67d;
+    font-weight: bold;
+}
+
+.table-actions a:hover {
+    color: #6bbf6b;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 1em auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+    text-align: center;
+    margin-bottom: 1em;
+    font-family: 'Bakbak One', cursive;
+}
+
+.form-container .form-group {
+    margin-bottom: 1.5em;
+}
+
+.form-container .form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.form-container .form-group input,
+.form-container .form-group select,
+.form-container .form-group textarea {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    font-size: 1em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #7fc67d;
+    box-shadow: 0 0 5px rgba(127, 198, 125, 0.5);
+    outline: none;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    display: block;
+}
+
+.form-container p {
+    margin-bottom: 1.5em;
+    font-size: 1.1em;
+}
+
+.form-container p label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.form-container p input,
+.form-container p select,
+.form-container p textarea {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-container p input:focus,
+.form-container p select:focus,
+.form-container p textarea:focus {
+    border-color: #7fc67d;
+    box-shadow: 0 0 5px rgba(127, 198, 125, 0.5);
+    outline: none;
+}
+
+.form-container .btn {
+    display: block;
+    width: 100%;
+    padding: 0.75em;
+    background-color: #7fc67d;
+    color: #fff;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 1em;
+    text-decoration: none;
+}
+
+.form-container .btn:hover {
+    background-color: #6bbf6b;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.detail-container {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
+}
+
+.detail-container h1 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-family: 'Bakbak One', cursive;
+}
+
+.detail-container h2 {
+    text-align: center;
+    margin-bottom: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.detail-container p {
+    margin-bottom: 1em;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.detail-container p strong {
+    font-weight: bold;
+    color: #333;
+}
+
+.detail-container .table-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.detail-container .table-actions a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #7fc67d;
+    padding: 0.75em 1.5em;
+    border-radius: 0.5em;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.detail-container .table-actions a:hover {
+    background-color: #6bbf6b;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin: 1em 0; /* Agregar márgenes superior e inferior */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-margin {
+    margin-top: 1em;
+    margin-bottom: 0.1em;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin: 1em;
+
+}
+.card {
+   
+    background-color: #fff;
+    border-radius: 0.5em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
+    padding: 1.3em;
+    flex: 1 1 calc(25% - 1em);
+    box-sizing: border-box;
+    
+}
+.card h2 {
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+}
+
+.card p, .card ul {
+    font-size: 1.5em;
+    color: #555;
+    
+}
+.card ul {
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 0;
+}
+.card ul li {
+    margin-bottom: 0.5em;
+}
+
+.monto_mensual p {
+    font-size: 2em;
+    margin-top: 1em;
+    text-align: center;
+
+    
+}
+
+.chart-container {
+    width: 70%;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul.errorlist {
+    color: red;
+    margin-bottom: 2em;
+}
+

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio{% endblock%}
+
+{% block content %}
+
+<div class="cards-container">
+  <div class="card">
+    <h2>Mas mantenimientos este mes</h2>
+    <p>{{ vehiculo_mas_mantenimientos }}</p>
+  </div>
+  <div class="card">
+    <h2>Mantenimiento más recurrente</h2>
+    <p>{{ tipo_mantenimiento_recurrente }}</p>
+  </div>
+  <div class="card monto_mensual">
+    <h2>Costo total mensual</h2>
+    <p class="monto_mes">S/.{{ gasto_total_mes }}</p>
+  </div>
+  
+</div>
+
+{%if documentos_proximos %}
+<div class="cards-container">
+<div class="card">
+  <h2>Documentos por vencer</h2>
+  <ul>
+    {% for documento in documentos_proximos %} 
+    <li>{{ documento.get_tipo_documento_display}} - {%if documento.vehiculo%}{{documento.vehiculo}}{%else%}{{documento.usuario}}{%endif%} - ({{ documento.fecha_expiracion}})</li>
+    {% endfor %}
+  </ul>
+</div>
+</div>
+{% endif %}
+
+
+{%if mantenimientos_proximos %}
+<div class="cards-container">
+<div class="card">
+  <h2>Proximos mantenimientos</h2>
+  <ul>
+    {% for mantenimiento in mantenimientos_proximos %} 
+    <li>{{ mantenimiento.tipo_mantenimiento}} - {{mantenimiento.vehiculo}} - ({{mantenimiento.fecha_proximo_mantenimiento}})</li>
+    {% endfor %}
+  </ul>
+</div>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+<div class="chart-container">
+  <canvas id="barras"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('barras');
+  const gastosMensuales = JSON.parse('{{ gastos_mensuales_json|escapejs }}');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: gastosMensuales.map(gasto => gasto.mes),
+      datasets: [{
+        label: 'Gasto Total',
+        data: gastosMensuales.map(gasto => gasto.gasto),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

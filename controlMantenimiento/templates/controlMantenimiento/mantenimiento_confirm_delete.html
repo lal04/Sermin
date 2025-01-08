@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Mantenimiento{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>Eliminar Mantenimiento</h1>
+        <p>¿Estás seguro de que deseas eliminar el mantenimiento "{{ object }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="btn">Eliminar</button>
+                <a href="{% url 'mantenimiento_list' %}" class="btn">Cancelar</a>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

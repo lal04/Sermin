@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+{% block title %}Detalle del Documento{% endblock %}
+
+{% block content %}
+    <div class="detail-container">
+        <h2>{{ object.get_tipo_documento_display }}</h2>
+        <p>{% if object.usuario %}<strong>Usuario:</strong> {{ object.usuario }}{% else %}<strong>Vehículo:</strong> {{ object.vehiculo }}{% endif %}</p>
+        <p><strong>Fecha de Emisión:</strong> {{ object.fecha_emision }}</p>
+        <p><strong>Fecha de Expiración:</strong> {{ object.fecha_expiracion }}</p>
+        <div class="table-actions">
+            <a href="{% url 'documento_update' object.pk %}">Editar</a>
+            <a href="{% url 'documento_delete' object.pk %}">Eliminar</a>
+            <a href="{% url 'documento_list' %}">Volver a la lista</a>
+        </div>
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block title %}Lista de Vehículos{% endblock %}
+{%block content %}
+<h1>Lista de Vehículos</h1>
+<a class="btn btn-primary btn-margin" href="{% url 'vehiculo_create' %}"
+  >Agregar</a
+>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Número de Placa</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vehiculo in object_list %}
+      <tr>
+        <td>{{ vehiculo.marca }}</td>
+        <td>{{ vehiculo.modelo }}</td>
+        <td>{{ vehiculo.numero_placa }}</td>
+        <td class="table-actions">
+          <a href="{% url 'vehiculo_detail' vehiculo.pk %}">Ver</a>
+          <a href="{% url 'vehiculo_update' vehiculo.pk %}">Editar</a>
+          <a href="{% url 'vehiculo_delete' vehiculo.pk %}">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

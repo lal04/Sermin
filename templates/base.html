@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>{% block title %}Sermin{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    
+  </head>
+  <body>
+    <header>
+      <img class="logo" src="{% static 'img/logo.svg'%}" alt="logo de sermin" />
+      <nav>
+        <ul class="nav_links">
+          <li><a href="{% url 'home' %}">Sermin</a></li>
+          
+        </ul>
+      </nav>
+      <a class="perfil" href="{% url 'logout' %}"><img class="logo" src="{% static 'img/logout.svg'%}" alt="icono para cerrar sesion" /></a>
+      
+      
+    </header>
+
+   {% comment %} incluimos el navbar a la plantilla base {% endcomment %}
+    {% include 'components/navbar.html' %}
+    
+
+    <main>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <div class="container">{% block content %} {% endblock %}</div>
+    </main>
+    {% block extra_js %}{% endblock %}
+    
+  </body>
+</html>

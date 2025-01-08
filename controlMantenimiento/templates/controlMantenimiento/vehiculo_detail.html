@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %}Detalle del Vehículo{% endblock %}
+{%block content %}
+<div class="detail-container">
+  <h2>{{ object.marca }}</h2>
+  <p><strong>Número de Placa:</strong> {{ object.numero_placa }}</p>
+  <p><strong>Año:</strong> {{ object.anio }}</p>
+  <p><strong>Modelo:</strong> {{ object.modelo }}</p>
+  <div class="table-actions">
+    <a href="{% url 'vehiculo_update' object.pk %}">Editar</a>
+    <a href="{% url 'vehiculo_delete' object.pk %}">Eliminar</a>
+    <a href="{% url 'vehiculo_list' %}">Volver</a>
+  </div>
+</div>
+{% endblock %}

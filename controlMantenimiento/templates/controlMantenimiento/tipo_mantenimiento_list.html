@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Tipos de Mantenimiento{% endblock %}
+
+{% block content %}
+    <h1>Lista de Tipos de Mantenimiento</h1>
+    <a class="btn btn-primary btn-margin" href="{% url 'tipo_mantenimiento_create' %}">Agregar</a>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tipo in object_list %}
+                <tr>
+                    <td>{{ tipo.nombre }}</td>
+                    <td class="table-actions">
+                        <a href="{% url 'tipo_mantenimiento_detail' tipo.pk %}">Ver</a>
+                        <a href="{% url 'tipo_mantenimiento_update' tipo.pk %}">Editar</a>
+                        <a href="{% url 'tipo_mantenimiento_delete' tipo.pk %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
