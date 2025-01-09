@@ -28,6 +28,7 @@ class HistorialKilometraje(models.Model):
 class TipoMantenimiento(models.Model):
     nombre = models.CharField(max_length=100)
     kilometraje_promedio=models.IntegerField(default=5000)
+    kilometraje_promedio=models.IntegerField(default=5000)
     descripcion = models.TextField(blank=True, null=True)
     def __str__(self):
         return self.nombre
