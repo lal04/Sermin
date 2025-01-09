@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block title_content %}
+{% block title %}
+Lista de Salidas de Vehiculos
+{% endblock %}
+{% endblock %}
+
+
+{%block content %}
+<a class="btn btn-primary btn-margin" href="{% url 'kilometraje_create' %}"
+  >Agregar</a
+>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Vehiculo</th>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Kilometraje</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for kilometraje in historialkilometraje_list %}
+      <tr onclick="window.location.href='{% url "kilometraje_detail" kilometraje.pk %}'">
+        <td>{{ kilometraje.vehiculo }}</td>
+        <td>{{ kilometraje.fecha }}</td>
+        <td>{{ kilometraje.tipo }}</td>
+        <td>{{ kilometraje.kilometraje }}</td>
+        <td class="table-actions">
+          <a href="{% url 'kilometraje_update' kilometraje.pk %}">Editar</a>
+          <a href="{% url 'kilometraje_delete' kilometraje.pk %}">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

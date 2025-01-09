@@ -1,18 +1,20 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.db.models import Count, Sum, Q
+from django.db.models import Count, Sum, Q, Max,OuterRef, Subquery, F
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 from django.views.generic import (ListView, DetailView,
                                   CreateView, UpdateView, DeleteView)
 
-from .models import (Vehiculo, TipoMantenimiento,
+from .models import (HistorialKilometraje, Vehiculo, TipoMantenimiento,
                      Mantenimiento, Documento, Proveedor)
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.timezone import now
+
 import json
 from decimal import Decimal
 
@@ -38,8 +40,23 @@ def home(request):
     documentos_proximos = Documento.objects.filter(fecha_expiracion__lte=datetime.now() + timedelta(days=30))
     
     # Obtiene los mantenimientos que se acerca la fecha de proximo mantenimiento en los próximos 30 días
-    mantenimientos_proximos = Mantenimiento.objects.filter(fecha_proximo_mantenimiento__lte=datetime.now() + timedelta(days=30))
+    # Obtener el último kilometraje de cada vehículo
+    ultimos_kilometrajes = (
+        HistorialKilometraje.objects.filter(vehiculo=OuterRef('vehiculo'))
+        .values('vehiculo')
+        .annotate(ultimo_kilometraje=Max('kilometraje'))
+        .values('ultimo_kilometraje')
+    )
 
+    # Anotar el kilometraje actual del vehículo en cada mantenimiento
+    mantenimientos_cercanos = Mantenimiento.objects.annotate(
+        kilometraje_actual=Subquery(ultimos_kilometrajes)
+    ).filter(
+        kilometraje_proximo_mantenimiento__gte=F('kilometraje_actual') - 500,
+        kilometraje_proximo_mantenimiento__lte=F('kilometraje_actual') + 500,
+    )
+    
+    
     
     # Calcular el gasto total de los últimos 6 meses
     gastos_mensuales = []
@@ -62,8 +79,8 @@ def home(request):
         'documentos_proximos': documentos_proximos,
         'gastos_mensuales': gastos_mensuales,
         'gastos_mensuales_json': gastos_mensuales_json,
-        'mantenimientos_proximos': mantenimientos_proximos,
-        'pk': ''
+        'mantenimientos_proximos': mantenimientos_cercanos,
+        
     }
 
     # Renderiza la plantilla 'home.html' con el contexto
@@ -136,7 +153,7 @@ class TipoMantenimientoDetailView(LoginRequiredMixin,DetailView):
 class TipoMantenimientoCreateView(LoginRequiredMixin,CreateView):
     model = TipoMantenimiento
     template_name = 'controlMantenimiento/tipo_mantenimiento_form.html'
-    fields = ['nombre', 'descripcion']
+    fields = '__all__'
     success_url = reverse_lazy('tipo_mantenimiento_list')
     
     
@@ -180,7 +197,7 @@ class MantenimientoDetailView(LoginRequiredMixin,DetailView):
 class MantenimientoCreateView(LoginRequiredMixin, CreateView):
     model = Mantenimiento
     #form_class = MantenimientoForm
-    fields = '__all__'
+    fields = ['proveedor', 'vehiculo','tipo_mantenimiento', 'fecha_mantenimiento', 'kilometraje', 'costo', 'descripcion']
     template_name = 'controlMantenimiento/mantenimiento_form.html'
     success_url = reverse_lazy('mantenimiento_list')
     
@@ -225,6 +242,12 @@ class DocumentoCreateView(LoginRequiredMixin, CreateView):
     template_name = 'controlMantenimiento/documento_form.html'
     fields = '__all__'
     success_url = reverse_lazy('documento_list')
+    
+    def get_initial(self):
+        initial= super().get_initial()
+        
+        initial['fecha_expiracion']=now().date()+relativedelta(years=5)
+        return initial
     
 class DocumentoUpdateView(LoginRequiredMixin, UpdateView):
     model = Documento
@@ -279,3 +302,43 @@ class ProveedorDeleteView(LoginRequiredMixin, DeleteView):
     model = Proveedor
     template_name = 'controlMantenimiento/proveedor_confirm_delete.html'
     success_url = reverse_lazy('proveedor_list')
+    
+#vista de HistorialKilometraje
+    
+class HistorialKilometrajeListView(LoginRequiredMixin, ListView):
+    model = HistorialKilometraje
+    template_name = 'controlMantenimiento/historial_kilometraje_list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('buscador', '')
+        if query:
+            queryset = queryset.filter(
+                Q(vehiculo__marca__icontains=query)|
+                Q(tipo__icontains=query)
+            )
+        return queryset
+
+class HistorialKilometrajeDetailView(LoginRequiredMixin, DetailView):
+    model = HistorialKilometraje
+    template_name = 'controlMantenimiento/historial_kilometraje_detail.html'
+
+class HistorialKilometrajeCreateView(LoginRequiredMixin, CreateView):
+    model = HistorialKilometraje
+    template_name = 'controlMantenimiento/historial_kilometraje_form.html'
+    fields = '__all__'
+    success_url = reverse_lazy('kilometraje_list')
+    
+
+class HistorialKilometrajeUpdateView(LoginRequiredMixin, UpdateView):
+    model = HistorialKilometraje
+    fields = '__all__'
+    template_name = 'controlMantenimiento/historial_kilometraje_form.html'
+   
+    success_url = reverse_lazy('kilometraje_list')
+    
+
+class HistorialKilometrajeDeleteView(LoginRequiredMixin, DeleteView):
+    model = HistorialKilometraje
+    template_name = 'controlMantenimiento/historial_kilometraje_confirm_delete.html'
+    success_url = reverse_lazy('kilometraje_list')

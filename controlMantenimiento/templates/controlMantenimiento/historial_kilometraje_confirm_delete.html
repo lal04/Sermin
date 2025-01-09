@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Registro{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>Eliminar Registro</h1>
+        <p>¿Estás seguro de que deseas eliminar el registro de {{historialkilometraje.tipo}} de {{ historialkilometraje.vehiculo}} {{ historialkilometraje.vehiculo.numero_placa}} con kilometraje {{historialkilometraje.kilometraje}}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="btn">Eliminar</button>
+                <a href="{% url 'kilometraje_list' %}" class="btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+

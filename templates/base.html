@@ -35,7 +35,7 @@
       </h1>
 
       {% comment %} {% if not request.resolver_match.url_name == 'home' and not pk %} {% endcomment %}
-      {% if request.resolver_match.url_name == 'vehiculo_list' or  request.resolver_match.url_name == 'tipo_mantenimiento_list' or request.resolver_match.url_name == 'mantenimiento_list' or request.resolver_match.url_name == 'documento_list' or request.resolver_match.url_name == 'proveedor_list' %}
+      {% if request.resolver_match.url_name == 'vehiculo_list' or  request.resolver_match.url_name == 'tipo_mantenimiento_list' or request.resolver_match.url_name == 'mantenimiento_list' or request.resolver_match.url_name == 'documento_list' or request.resolver_match.url_name == 'proveedor_list' or request.resolver_match.url_name == 'kilometraje_list' %}
         
         <form action="{% url request.resolver_match.url_name %}" method="get">
         <input type="text" name="buscador" placeholder="Buscar..." >

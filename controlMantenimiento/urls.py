@@ -33,9 +33,17 @@ urlpatterns = [
     path('documentos/<int:pk>/eliminar/', views.DocumentoDeleteView.as_view(), name='documento_delete'),
     
     # Rutas para Proveedor
-    path('provedores/', views.ProveedorListView.as_view(), name='proveedor_list'),
-    path('provedores/<int:pk>/', views.ProveedorDetailView.as_view(), name='proveedor_detail'),
-    path('provedores/nuevo/', views.ProveedorCreateView.as_view(), name='proveedor_create'),
-    path('provedores/<int:pk>/editar/', views.ProveedorUpdateView.as_view(), name='proveedor_update'),
-    path('provedores/<int:pk>/eliminar/', views.ProveedorDeleteView.as_view(), name='proveedor_delete'),
+    path('proveedores/', views.ProveedorListView.as_view(), name='proveedor_list'),
+    path('proveedores/<int:pk>/', views.ProveedorDetailView.as_view(), name='proveedor_detail'),
+    path('proveedores/nuevo/', views.ProveedorCreateView.as_view(), name='proveedor_create'),
+    path('proveedores/<int:pk>/editar/', views.ProveedorUpdateView.as_view(), name='proveedor_update'),
+    path('proveedores/<int:pk>/eliminar/', views.ProveedorDeleteView.as_view(), name='proveedor_delete'),
+    
+    
+    # Rutas para Historial de kilometraje
+    path('kilometraje/', views.HistorialKilometrajeListView.as_view(), name='kilometraje_list'),
+    path('kilometraje/<int:pk>/', views.HistorialKilometrajeDetailView.as_view(), name='kilometraje_detail'),
+    path('kilometraje/nuevo/', views.HistorialKilometrajeCreateView.as_view(), name='kilometraje_create'),
+    path('kilometraje/<int:pk>/editar/', views.HistorialKilometrajeUpdateView.as_view(), name='kilometraje_update'),
+    path('kilometraje/<int:pk>/eliminar/', views.HistorialKilometrajeDeleteView.as_view(), name='kilometraje_delete'),
 ]

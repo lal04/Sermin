@@ -15,6 +15,7 @@ Lista de Tipos de Mantenimiento
                 <tr>
                     <th>Nombre</th>
                     <th>Descripcion</th>
+                    <th>Kilometraje Promedio</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@ Lista de Tipos de Mantenimiento
                 <tr onclick="window.location.href='{% url "tipo_mantenimiento_detail" tipo.pk %}'" >
                     <td>{{ tipo.nombre }}</td>
                     <td>{{ tipo.descripcion }}</td>
+                    <td>{{ tipo.kilometraje_promedio }} Km</td>
                     <td class="table-actions">
                         <a href="{% url 'tipo_mantenimiento_update' tipo.pk %}">Editar</a>
                         <a href="{% url 'tipo_mantenimiento_delete' tipo.pk %}">Eliminar</a>

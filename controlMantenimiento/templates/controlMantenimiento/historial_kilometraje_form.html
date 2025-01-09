@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if object %}Editar Registro{% else %}Nuevo Registro{% endif %}{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>{% if object %}Editar Registro{% else %}Nuevo Registro{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button type="submit" class="btn">Guardar</button>
+                <a href="{% url 'kilometraje_list' %}" class="btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
