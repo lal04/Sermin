@@ -14,9 +14,21 @@ class Vehiculo(models.Model):
     def __str__(self):
         return self.marca
     
+class HistorialKilometraje(models.Model):
+    TIPO_CHOICES=(
+        (('Salida'), ('Salida')),
+        (('Entrada'), ('Entrada'))
+        )
+    
+    vehiculo=models.ForeignKey(Vehiculo, on_delete=models.CASCADE, null=True, blank=True)
+    fecha=models.DateField(default=date.today())
+    tipo=models.CharField(max_length=15, choices=TIPO_CHOICES, default='Salida')
+    kilometraje=models.IntegerField()
+    
     
 class TipoMantenimiento(models.Model):
     nombre = models.CharField(max_length=100)
+    kilometraje_promedio=models.IntegerField(default=5000)
     descripcion = models.TextField(blank=True, null=True)
     def __str__(self):
         return self.nombre
@@ -34,9 +46,15 @@ class Mantenimiento(models.Model):
     vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
     tipo_mantenimiento = models.ForeignKey(TipoMantenimiento, on_delete=models.CASCADE)
     fecha_mantenimiento = models.DateField(default=date.today)
-    fecha_proximo_mantenimiento = models.DateField(default=lambda:date.today() + relativedelta(months=1))
+    kilometraje=models.IntegerField()
+    kilometraje_proximo_mantenimiento=models.IntegerField()
     costo = models.DecimalField(max_digits=10, decimal_places=2)
     descripcion = models.TextField(blank=True, null=True)
+    
+    def save(self,*args, **kwargs):
+        self.kilometraje_proximo_mantenimiento=self.kilometraje+self.tipo_mantenimiento.kilometraje_promedio
+        return super(*args, **kwargs)
+    
 
     def __str__(self):
         return f"{self.vehiculo} - {self.tipo_mantenimiento} ({self.fecha_mantenimiento})"
