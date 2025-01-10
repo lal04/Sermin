@@ -7,13 +7,15 @@
         <h2>{{ mantenimiento.vehiculo }} - {{ mantenimiento.tipo_mantenimiento }}</h2>
         <p><strong>Proveedor:</strong> {{ mantenimiento.proveedor }}</p>
         <p><strong>Fecha de Mantenimiento:</strong> {{ mantenimiento.fecha_mantenimiento }}</p>
-        <p><strong>Fecha del Próximo Mantenimiento:</strong> {{ mantenimiento.fecha_proximo_mantenimiento }}</p>
+        <p><strong>Kilometraje:</strong> {{ mantenimiento.kilometraje}} km</p>
+        <p><strong>Proximo Mantenimiento:</strong> {{ mantenimiento.kilometraje_proximo_mantenimiento}} km</p>
         <p><strong>Costo:</strong> S/. {{ mantenimiento.costo }}</p>
-        <p><strong>Descripción:</strong> {{ mantenimiento.descripcion }}</p>
+        <p><strong>Estado:</strong> {{ mantenimiento.estado}}</p>
+        <p><strong>Descripcion:</strong> {{ mantenimiento.descripcion }}</p>
         <div class="table-actions">
             <a href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>
             <a href="{% url 'mantenimiento_delete' mantenimiento.pk %}">Eliminar</a>
-            <a href="{% url 'mantenimiento_list' %}">Volver a la lista</a>
+            <a href="{% url 'mantenimiento_list' %}">Volver</a>
         </div>
     </div>
 {% endblock %}

@@ -18,6 +18,8 @@ Lista de Mantenimientos
                     <th>Tipo de Mantenimiento</th>
                     <th>Proveedor</th>
                     <th>Fecha de Mantenimiento</th>
+                    <th>Kilometraje</th>
+                    <th>Estado</th>
                     <th>Costo</th>
                     <th>Acciones</th>
                 </tr>
@@ -29,6 +31,8 @@ Lista de Mantenimientos
                     <td>{{ mantenimiento.tipo_mantenimiento }}</td>
                     <td>{{ mantenimiento.proveedor }}</td>
                     <td>{{ mantenimiento.fecha_mantenimiento }}</td>
+                    <td>{{ mantenimiento.kilometraje}} km</td>
+                    <td>{{ mantenimiento.estado}}</td>
                     <td> S/.{{ mantenimiento.costo }}</td>
                     <td class="table-actions">
                         <a href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>

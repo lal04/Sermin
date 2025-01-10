@@ -36,10 +36,10 @@ def home(request):
 
     # Calcula el gasto total en mantenimientos del mes actual
     gasto_total_mes = Mantenimiento.objects.filter(fecha_mantenimiento__month=datetime.now().month).aggregate(total=Sum('costo'))['total']
-    # Obtiene los documentos que están próximos a expirar en los próximos 30 días
-    documentos_proximos = Documento.objects.filter(fecha_expiracion__lte=datetime.now() + timedelta(days=30))
     
-    # Obtiene los mantenimientos que se acerca la fecha de proximo mantenimiento en los próximos 30 días
+    # Obtiene los documentos que están próximos a expirar en los próximos 30 días
+    documentos_proximos = Documento.objects.filter(fecha_expiracion__lte=datetime.now() + timedelta(days=30), estado='Pendiente')
+    
     # Obtener el último kilometraje de cada vehículo
     ultimos_kilometrajes = (
         HistorialKilometraje.objects.filter(vehiculo=OuterRef('vehiculo'))
@@ -52,8 +52,9 @@ def home(request):
     mantenimientos_cercanos = Mantenimiento.objects.annotate(
         kilometraje_actual=Subquery(ultimos_kilometrajes)
     ).filter(
-        kilometraje_proximo_mantenimiento__gte=F('kilometraje_actual') - 500,
+        #kilometraje_proximo_mantenimiento__gte=F('kilometraje_actual') - 500,
         kilometraje_proximo_mantenimiento__lte=F('kilometraje_actual') + 500,
+        estado='Pendiente'
     )
     
     

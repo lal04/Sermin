@@ -28,7 +28,6 @@ class HistorialKilometraje(models.Model):
 class TipoMantenimiento(models.Model):
     nombre = models.CharField(max_length=100)
     kilometraje_promedio=models.IntegerField(default=5000)
-    kilometraje_promedio=models.IntegerField(default=5000)
     descripcion = models.TextField(blank=True, null=True)
     def __str__(self):
         return self.nombre
@@ -42,6 +41,11 @@ class Proveedor(models.Model):
         return self.nombre
 
 class Mantenimiento(models.Model):
+    ESTADOS_CHOICES=(
+        ('Pendiente','Pendiente' ),
+        ('Atendido','Atendido' ),
+    )
+    
     proveedor=models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True) ###el null solo fue para poder crear la migracion
     vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
     tipo_mantenimiento = models.ForeignKey(TipoMantenimiento, on_delete=models.CASCADE)
@@ -49,6 +53,7 @@ class Mantenimiento(models.Model):
     kilometraje=models.IntegerField(null=True)
     kilometraje_proximo_mantenimiento=models.IntegerField(null=True, blank=True, default=0)
     costo = models.DecimalField(max_digits=10, decimal_places=2)
+    estado=models.CharField(choices=ESTADOS_CHOICES, default='Pendiente', max_length=15)
     descripcion = models.TextField(blank=True, null=True)
     
     def save(self,*args, **kwargs):
@@ -76,12 +81,17 @@ class Documento(models.Model):
         
         # Agrega más tipos de documentos según sea necesario
     ]
+    ESTADOS_CHOICES=(
+        ('Pendiente','Pendiente' ),
+        ('Tramitado','Tramitado' ),
+    )
     tipo_documento = models.CharField(max_length=50, choices=TIPO_DOCUMENTO_CHOICES, verbose_name='tipo de documento')
 
     vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, blank=True, null=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     fecha_emision = models.DateField(default=now,verbose_name='fecha de emision')
     fecha_expiracion = models.DateField(verbose_name='fecha de expiracion')
+    estado=models.CharField(choices=ESTADOS_CHOICES, default='Pendiente', max_length=15)
     
     def __str__(self):
         return f"{self.get_tipo_documento_display()} - {self.fecha_emision}"
