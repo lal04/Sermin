@@ -90,7 +90,7 @@ class Documento(models.Model):
     vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, blank=True, null=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     fecha_emision = models.DateField(default=now,verbose_name='fecha de emision')
-    fecha_expiracion = models.DateField(verbose_name='fecha de expiracion')
+    fecha_expiracion = models.DateField(verbose_name='fecha de expiracion', default=now)
     estado=models.CharField(choices=ESTADOS_CHOICES, default='Pendiente', max_length=15)
     
     def __str__(self):

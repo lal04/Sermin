@@ -241,7 +241,13 @@ class DocumentoDetailView(LoginRequiredMixin, DetailView):
 class DocumentoCreateView(LoginRequiredMixin, CreateView):
     model = Documento
     template_name = 'controlMantenimiento/documento_form.html'
-    fields = '__all__'
+    fields = [
+        'tipo_documento',
+        'vehiculo', 
+        'usuario',
+        'fecha_emision',
+        'fecha_expiracion',
+        ]
     success_url = reverse_lazy('documento_list')
     
     def get_initial(self):
