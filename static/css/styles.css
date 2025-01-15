@@ -9,83 +9,12 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
-    padding-top: 3.5em; /* Añadir margen superior para el header */
-}
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.3em 2em;
-    background-color: #7fc67d;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000; /* Asegurar que esté por encima de la barra lateral */
-}
-header  a, header li{
-    text-decoration: none;
-    list-style: none;
-    font-size: 1.1em;
-    color: #fff;
-    
-}
-.nav_links li {
-    display: inline-block;
-    padding: 0 1.2em;
-}
-.logo {
-    cursor: pointer;
-    width: 2em;
-    border-radius: 1em;
-}
-.perfil {
-    display: block;
-    width: 2.3em;
-    height: 2.3em;
-    border-radius: 2em;
-    text-align: center;
-    color: #fff;
-    line-height: 2.3em;
     
 }
 
-.sidebar {
-    width: 12.5em;
-    background-color: #3c3c3c;
-    position: fixed;
-    top: 3.5em; /* Debajo del header */
-    left: 0;
-    height: calc(100% - 3.5em); /* Ajustar la altura para el header */
-    padding-top: 1em;
-    z-index: 999; /* Asegurar que esté por debajo del header */
-    border-radius: 0 1em 1em 0;
-}
-
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 0; /* Eliminar padding del li */
-    text-align: center;
-}
-
-.sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 1em; /* Añadir padding al enlace */
-    width: 100%; /* Asegurar que ocupe todo el ancho del li */
-    box-sizing: border-box; /* Incluir padding en el ancho total */
-}
-
-.sidebar ul li a:hover {
-    background-color: #575757;
-}
 
 main {
-    margin-left: 13.5em; /* Añadir margen izquierdo para la barra lateral */
+    margin-top: 3.5em;
     padding: 1em;
 }
 
