@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.db.models import Count, Sum, Q, Max,OuterRef, Subquery, F
 from .forms import MantenimientoForm
+from django.contrib import messages
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
@@ -158,6 +159,10 @@ class TipoMantenimientoCreateView(LoginRequiredMixin,CreateView):
     fields = '__all__'
     success_url = reverse_lazy('tipo_mantenimiento_list')
     
+    def form_valid(self, form):
+        messages.success(self.request, '¡Mantenimiento creado exitosamente!')
+        
+        return super().form_valid(form)
     
 
 class TipoMantenimientoUpdateView(LoginRequiredMixin, UpdateView):
@@ -165,6 +170,12 @@ class TipoMantenimientoUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'controlMantenimiento/tipo_mantenimiento_form.html'
     fields = ['nombre', 'descripcion']
     success_url = reverse_lazy('tipo_mantenimiento_list')  # Añadir success_url
+    
+    def form_valid(self, form):
+        messages.success(self.request, '¡Mantenimiento creado exitosamente!')
+        
+        return super().form_valid(form)
+    
     
 
 

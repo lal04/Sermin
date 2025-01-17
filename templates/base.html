@@ -14,6 +14,11 @@
   <!-- CDN datatables -->
   <script src="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/js/jquery.dataTables.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/css/jquery.dataTables.min.css">
+
+  <!-- CDN izitoast -->
+  <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+
 </head>
 <body>
   <header>
@@ -32,7 +37,20 @@
     <div class="container">
       {% block content %}
       {% endblock %}
+
+
+      {% for message in messages %}
+  <script>
+
+    iziToast.success({
+      title: 'CORRECTO',
+      message: {{message}},
+  });
+  </script>
+  
+  {% endfor %}
       <!-- modal-->
+
 
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -55,7 +73,19 @@
       
     </div>
 
+
   </main>
+  {% for message in messages %}
+  <script>
+
+    iziToast.success({
+      title: 'CORRECTO',
+      message: '{{message}}',
+  });
+  </script>
+  
+  {% endfor %}
+
 
   {% block extra_js %}
   {% endblock %}
