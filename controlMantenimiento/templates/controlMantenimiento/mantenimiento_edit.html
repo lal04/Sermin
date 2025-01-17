@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% block title %}Editar Mantenimiento{% endblock %}
+
+{% block titulo_modal %}Editar Mantenimiento{% endblock %}
+
+
+  {% block contenido_modal %}
+  <form method="post" action=" {% url 'mantenimiento_update' mantenimiento.pk %} " id="modal">
+      {% csrf_token %}
+      {{ form.as_p }}
+    </form>
+    {% endblock %}
+    {% block script %}
+    
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Obtener el modal
+    const modal = document.getElementById('exampleModal');
+
+    // Agregar el atributo data-bs-backdrop="static"
+    modal.setAttribute('data-bs-backdrop', 'static');
+
+    
+    // Obtener el botón de cancelar
+    const cancelButton = document.getElementById('cancelButton');
+    
+    // Agregar un event listener para redirigir al hacer clic
+    cancelButton.addEventListener('click', function () {
+      // Redirigir a la URL de 'mantenimiento_list'
+      window.location.href = "{% url 'mantenimiento_list' %}";
+    });
+    
+    // Inicializar y mostrar el modal
+    const myModal = new bootstrap.Modal(modal);
+    myModal.show();
+});
+
+</script>
+  {% endblock %}

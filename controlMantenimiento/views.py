@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.db.models import Count, Sum, Q, Max,OuterRef, Subquery, F
+from .forms import MantenimientoForm
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
@@ -177,19 +178,13 @@ class TipoMantenimientoDeleteView(LoginRequiredMixin,DeleteView):
 # Vistas para Mantenimiento
 class MantenimientoListView(LoginRequiredMixin,ListView):
     model = Mantenimiento
-    template_name = 'controlMantenimiento/mantenimiento_list.html'
     
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        query = self.request.GET.get('buscador', '')
-        if query:
-            queryset = queryset.filter(
-                Q(proveedor__nombre__icontains=query) |
-                Q(vehiculo__marca__icontains=query) |
-                Q(tipo_mantenimiento__nombre__icontains=query)
-                
-            )
-        return queryset
+    template_name = 'controlMantenimiento/mantenimiento_list.html'
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['form']=MantenimientoForm
+        return context
+    
 
 class MantenimientoDetailView(LoginRequiredMixin,DetailView):
     model = Mantenimiento
@@ -201,6 +196,7 @@ class MantenimientoCreateView(LoginRequiredMixin, CreateView):
     fields = ['proveedor', 'vehiculo','tipo_mantenimiento', 'fecha_mantenimiento', 'kilometraje', 'costo', 'descripcion']
     template_name = 'controlMantenimiento/mantenimiento_form.html'
     success_url = reverse_lazy('mantenimiento_list')
+
     
     
     
@@ -208,9 +204,22 @@ class MantenimientoUpdateView(LoginRequiredMixin,UpdateView):
     model = Mantenimiento
     fields = '__all__'
     # form_class = MantenimientoForm
-    template_name = 'controlMantenimiento/mantenimiento_form.html'
-    success_url = reverse_lazy('mantenimiento_list')  # Añadir success_url  
-
+    template_name = 'controlMantenimiento/mantenimiento_edit.html'
+    success_url = reverse_lazy('mantenimiento_list')  # Añadir success_url
+    def get_form(self, form_class = None):
+        form= super().get_form(form_class)
+        form.fields['proveedor'].widget.attrs.update({'class': 'form-select'})
+        form.fields['vehiculo'].widget.attrs.update({'class': 'form-select'})
+        form.fields['tipo_mantenimiento'].widget.attrs.update({'class': 'form-select'})
+        form.fields['fecha_mantenimiento'].widget.attrs.update({'class': 'form-control'})
+        form.fields['kilometraje'].widget.attrs.update({'class': 'form-control'})
+        form.fields['kilometraje_proximo_mantenimiento'].widget.attrs.update({'class': 'form-control'})
+        form.fields['costo'].widget.attrs.update({'class': 'form-control'})
+        form.fields['estado'].widget.attrs.update({'class': 'form-select'})
+        form.fields['descripcion'].widget.attrs.update({'class': 'form-control', 'rows':4})
+        
+        return form
+    
 class MantenimientoDeleteView(LoginRequiredMixin,DeleteView):
     model = Mantenimiento
     template_name = 'controlMantenimiento/mantenimiento_confirm_delete.html'

@@ -1,46 +1,55 @@
 {% extends 'base.html' %}
 
-{% block title_content %}
-{% block title %}
-Lista de Mantenimientos
-{% endblock %}
-{% endblock %}
+{% block title %}Lista de Mantenimientos{% endblock %}
 
 {% block content %}
-    <a class="btn btn-primary btn-margin" href="{% url 'mantenimiento_create' %}">Agregar</a>
 
+{% include "components/boton_modal.html" %}
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Vehículo</th>
-                    <th>Tipo de Mantenimiento</th>
-                    <th>Proveedor</th>
-                    <th>Fecha de Mantenimiento</th>
-                    <th>Kilometraje</th>
-                    <th>Estado</th>
-                    <th>Costo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for mantenimiento in object_list %}
-                <tr onclick="window.location.href='{% url "mantenimiento_detail" mantenimiento.pk %}'">
-                    <td>{{ mantenimiento.vehiculo }}</td>
-                    <td>{{ mantenimiento.tipo_mantenimiento }}</td>
-                    <td>{{ mantenimiento.proveedor }}</td>
-                    <td>{{ mantenimiento.fecha_mantenimiento }}</td>
-                    <td>{{ mantenimiento.kilometraje}} km</td>
-                    <td>{{ mantenimiento.estado}}</td>
-                    <td> S/.{{ mantenimiento.costo }}</td>
-                    <td class="table-actions">
-                        <a href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>
-                        <a href="{% url 'mantenimiento_delete' mantenimiento.pk %}">Eliminar</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="table-container">
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Vehículo</th>
+        <th>Tipo de Mantenimiento</th>
+        <th>Proveedor</th>
+        <th>Fecha de Mantenimiento</th>
+        <th>Km</th>
+        <th>Estado</th>
+        <th>Costo S/.</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for mantenimiento in object_list %}
+      <tr onclick="window.location.href='{% url "mantenimiento_detail" mantenimiento.pk %}'">
+        <td>{{ mantenimiento.vehiculo }}</td>
+        <td>{{ mantenimiento.tipo_mantenimiento }}</td>
+        <td>{{ mantenimiento.proveedor }}</td>
+        <td>{{ mantenimiento.fecha_mantenimiento }}</td>
+        <td>{{ mantenimiento.kilometraje }}</td>
+        <td>{{ mantenimiento.estado }}</td>
+        <td>{{ mantenimiento.costo }}</td>
+        <td class="table-actions">
+          <a href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>
+          <a href="{% url 'mantenimiento_delete' mantenimiento.pk %}">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
+
+{% block titulo_modal %} Nuevo Mantenimiento{% endblock %}
+
+{% block contenido_modal %}
+<form method="post" action=" {% url 'mantenimiento_create' %} " id="modal">
+    {% csrf_token %}
+    {{ form.as_p }}
+  </form>
+{% endblock contenido_modal %}
+
+
+
+
