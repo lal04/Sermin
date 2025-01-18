@@ -6,8 +6,8 @@
 
 {% include "components/boton_modal.html" %}
 
-<div class="table-container">
-  <table id="tabla">
+
+  <table class="table table-hover table-info  " id="tabla">
     <thead>
       <tr>
         <th>Vehículo</th>
@@ -31,14 +31,13 @@
         <td>{{ mantenimiento.estado }}</td>
         <td>{{ mantenimiento.costo }}</td>
         <td class="table-actions">
-          <a href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>
-          <a href="{% url 'mantenimiento_delete' mantenimiento.pk %}">Eliminar</a>
+          <a  class=" btn btn-secondary m-0 " href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>
+          <a class="btn btn-danger m-0" href="{% url 'mantenimiento_delete' mantenimiento.pk %}">Eliminar</a>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-</div>
 {% endblock %}
 
 {% block titulo_modal %} Nuevo Mantenimiento{% endblock %}

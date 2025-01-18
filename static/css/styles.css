@@ -12,12 +12,6 @@ body {
     
 }
 
-
-main {
-    margin-top: 3.5em;
-    padding: 1em;
-}
-
 .login-container {
     max-width: 400px;
     margin: 5em auto;
@@ -68,17 +62,8 @@ main {
     background-color: #6bbf6b;
 }
 
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-    margin-top: 2em;
-}
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 2em;
-}
+
 
 table th, table td {
     padding: 1em;
@@ -91,25 +76,8 @@ table th {
     color: white;
 }
 
-tr:hover {
-    background-color: #eeeded;
-    cursor: pointer;
-}
 
-.table-actions {
-    display: flex;
-    gap: 1em;
-}
 
-.table-actions a {
-    text-decoration: none;
-    color: #7fc67d;
-    font-weight: bold;
-}
-
-.table-actions a:hover {
-    color: #6bbf6b;
-}
 
 .form-container {
     max-width: 600px;
@@ -243,26 +211,13 @@ label {
     color: #333;
 }
 
-.detail-container .table-actions {
+.detail-container{
     display: flex;
     justify-content: center;
     gap: 1em;
     margin-top: 2em;
 }
 
-.detail-container .table-actions a {
-    text-decoration: none;
-    color: #fff;
-    background-color: #7fc67d;
-    padding: 0.75em 1.5em;
-    border-radius: 0.5em;
-    font-size: 1.1em;
-    font-weight: bold;
-}
-
-.detail-container .table-actions a:hover {
-    background-color: #6bbf6b;
-}
 
 .btn-primary {
     display: inline-block;
@@ -280,11 +235,6 @@ label {
 
 .btn-primary:hover {
     background-color: #0056b3;
-}
-
-.btn-margin {
-    margin-top: 1em;
-    margin-bottom: 0.1em;
 }
 
 .cards-container {
