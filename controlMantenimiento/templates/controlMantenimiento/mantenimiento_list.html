@@ -3,11 +3,9 @@
 {% block title %}Lista de Mantenimientos{% endblock %}
 
 {% block content %}
-
 {% include "components/boton_modal.html" %}
 
-
-  <table class="table table-hover table-info  " id="tabla">
+  <table class="table table-hover table-info" id="tabla">
     <thead>
       <tr>
         <th>Vehículo</th>
@@ -22,7 +20,7 @@
     </thead>
     <tbody>
       {% for mantenimiento in object_list %}
-      <tr onclick="window.location.href='{% url "mantenimiento_detail" mantenimiento.pk %}'">
+      <tr>
         <td>{{ mantenimiento.vehiculo }}</td>
         <td>{{ mantenimiento.tipo_mantenimiento }}</td>
         <td>{{ mantenimiento.proveedor }}</td>
@@ -31,7 +29,7 @@
         <td>{{ mantenimiento.estado }}</td>
         <td>{{ mantenimiento.costo }}</td>
         <td class="table-actions">
-          <a  class=" btn btn-secondary m-0 " href="{% url 'mantenimiento_update' mantenimiento.pk %}">Editar</a>
+          <button class="btn btn-secondary m-0" data-bs-toggle="modal" data-bs-target="#exampleModal" data-action="edit" data-id="{{ mantenimiento.pk }}">Editar</button>
           <a class="btn btn-danger m-0" href="{% url 'mantenimiento_delete' mantenimiento.pk %}">Eliminar</a>
         </td>
       </tr>
@@ -40,14 +38,42 @@
   </table>
 {% endblock %}
 
-{% block titulo_modal %} Nuevo Mantenimiento{% endblock %}
+{% block titulo_modal %}Crear Nuevo Mantenimiento{% endblock %}
 
-{% block contenido_modal %}
-<form method="post" action=" {% url 'mantenimiento_create' %} " id="modal">
-    {% csrf_token %}
-    {{ form.as_p }}
-  </form>
-{% endblock contenido_modal %}
+{% block contenido_modal %}{% endblock %}
+
+{% block script %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const exampleModal = document.getElementById('exampleModal');
+    exampleModal.addEventListener('show.bs.modal', (event) => {
+      const button = event.relatedTarget;
+      const action = button.getAttribute('data-action');
+      const modalTitle = exampleModal.querySelector('.modal-title');
+      const modalBody = exampleModal.querySelector('.modal-body');
+      
+      if (action === 'create') {
+        modalTitle.textContent = 'Nuevo Mantenimiento';
+        modalBody.innerHTML = `
+          <form method="post" action="{% url 'mantenimiento_create' %}" id="modal">
+            {% csrf_token %}
+            {{ form.as_p }}
+          </form>
+        `;
+      } else if (action === 'edit') {
+        const id = button.getAttribute('data-id');
+        modalTitle.textContent = 'Editar Mantenimiento';
+        fetch({% url "mantenimiento_update" mantenimient.pk %})
+          .then(response => response.text())
+          .then(html => {
+            modalBody.innerHTML = html;
+          });
+      }
+    });
+  });
+</script>
+{% endblock %}
+
 
 
 

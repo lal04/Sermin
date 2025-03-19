@@ -211,14 +211,14 @@ class MantenimientoCreateView(LoginRequiredMixin, CreateView):
     
     
     
-class MantenimientoUpdateView(LoginRequiredMixin,UpdateView):
+class MantenimientoUpdateView(LoginRequiredMixin, UpdateView):
     model = Mantenimiento
     fields = '__all__'
-    # form_class = MantenimientoForm
-    template_name = 'controlMantenimiento/mantenimiento_edit.html'
-    success_url = reverse_lazy('mantenimiento_list')  # Añadir success_url
-    def get_form(self, form_class = None):
-        form= super().get_form(form_class)
+    template_name = 'controlMantenimiento/mantenimiento_form.html'
+    success_url = reverse_lazy('mantenimiento_list')
+    
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
         form.fields['proveedor'].widget.attrs.update({'class': 'form-select'})
         form.fields['vehiculo'].widget.attrs.update({'class': 'form-select'})
         form.fields['tipo_mantenimiento'].widget.attrs.update({'class': 'form-select'})
@@ -227,9 +227,12 @@ class MantenimientoUpdateView(LoginRequiredMixin,UpdateView):
         form.fields['kilometraje_proximo_mantenimiento'].widget.attrs.update({'class': 'form-control'})
         form.fields['costo'].widget.attrs.update({'class': 'form-control'})
         form.fields['estado'].widget.attrs.update({'class': 'form-select'})
-        form.fields['descripcion'].widget.attrs.update({'class': 'form-control', 'rows':4})
-        
+        form.fields['descripcion'].widget.attrs.update({'class': 'form-control', 'rows': 4})
         return form
+
+    def form_valid(self, form):
+        messages.success(self.request, '¡Mantenimiento actualizado exitosamente!')
+        return super().form_valid(form)
     
 class MantenimientoDeleteView(LoginRequiredMixin,DeleteView):
     model = Mantenimiento

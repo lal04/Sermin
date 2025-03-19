@@ -50,22 +50,7 @@
     </main>
 
     <!-- Modal genérico -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">{% block titulo_modal %}{% endblock %}</h1>
-          </div>
-          <div class="modal-body">
-            {% block contenido_modal %}{% endblock %}
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelButton">Cancelar</button>
-            <button type="submit" form="modal" class="btn btn-primary">Guardar</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% include 'components/modal.html' %}
 
     {% block extra_js %}{% endblock %}
 
